@@ -19,7 +19,11 @@ dependencies:
   dio:
   retrofit:
   json_annotation:
+  logger:
   get_it:
+  shared_preferences:
+  fan_carousel_image_slider:
+  youtube_player_flutter: 9.0.0
   dartz:
   cloud_firestore:
 
