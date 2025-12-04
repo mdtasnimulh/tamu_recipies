@@ -16,11 +16,7 @@ class RecipeRepoImpl extends RecipeRepository {
         return Left(error);
       },
       (data) {
-        var recipes = List.from(data['recipes'])
-            .map(
-              (item) => RecipeApiMapper.toEntity(RecipeApiResponse.fromJson(item)),
-            )
-            .toList();
+        var recipes = List.from(data['recipes']).map((item) => RecipeApiMapper.toEntity(RecipeApiResponse.fromJson(item))).toList();
         return Right(recipes);
       },
     );

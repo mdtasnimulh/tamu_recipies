@@ -1,6 +1,6 @@
 class AppUrls {
   static const baseUrl = "https://api.spoonacular.com/";
-  static const movieAPIKey = "x-api-key=c1d6ad65204745768b663bdca0a64f01";
+  static const movieAPIKey = "c1d6ad65204745768b663bdca0a64f01";
 
-  static const randomRecipeUrl = "recipes/random?$movieAPIKey";
+  static const randomRecipeUrl = "recipes/random?apiKey=$movieAPIKey";
 }
