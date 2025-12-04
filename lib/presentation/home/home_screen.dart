@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tamu_recipes/presentation/home/screens/random_recipe.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,10 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text(
-        'Home Screen',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
+      child: RandomRecipe(),
     );
   }
 }
