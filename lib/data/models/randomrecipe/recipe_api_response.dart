@@ -60,7 +60,7 @@ class RecipeApiResponse {
   final dynamic preparationMinutes;
   final dynamic cookingMinutes;
   final int? aggregateLikes;
-  final int? healthScore;
+  final double? healthScore;
   final String? creditsText;
   final String? license;
   final String? sourceName;
