@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tamu_recipes/presentation/home/bloc/random_recipe_cubit.dart';
 import 'package:tamu_recipes/presentation/home/bloc/random_recipe_state.dart';
+import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 
 class RandomRecipe extends StatelessWidget {
   const RandomRecipe({super.key});
@@ -19,8 +20,26 @@ class RandomRecipe extends StatelessWidget {
           }
 
           if (state is RandomRecipeLoaded) {
-            return Center(
-              child: Text(state.recipes.first.title.toString()),
+            return Scaffold(
+              body: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FanCarouselImageSlider.sliderType2(
+                      imagesLink: state.recipes.map((e) => e.image ?? '').toList(),
+                      isAssets: false,
+                      autoPlay: false,
+                      sliderHeight: 300,
+                      currentItemShadow: const [],
+                      sliderDuration: const Duration(milliseconds: 200),
+                      imageRadius: 0,
+                      slideViewportFraction: 1.2,
+                    ),
+                    SizedBox(height: 16,),
+                    Text(state.recipes.first.title.toString())
+                  ],
+                ),
+              ),
             );
           }
 
