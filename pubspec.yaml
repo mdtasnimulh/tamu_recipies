@@ -27,6 +27,7 @@ dependencies:
   dartz:
   cloud_firestore:
   drift:
+  drift_flutter:
 #  hive:
 #  hive_flutter:
 
