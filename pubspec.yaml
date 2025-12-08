@@ -26,6 +26,8 @@ dependencies:
   youtube_player_flutter: 9.0.0
   dartz:
   cloud_firestore:
+  hive:
+  hive_flutter:
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +35,7 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
   retrofit_generator:
+  hive_generator:
   build_runner:
   json_serializable:
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tamu_recipes/presentation/planner/meal_planner_screen.dart';
 import 'package:tamu_recipes/presentation/settings/settings_screen.dart';
 import '../../../core/configs/theme/app_colors.dart';
 import '../../home/home_screen.dart';
@@ -13,6 +14,7 @@ class MainScreen extends StatelessWidget {
   static final List<Widget> _pages = [
     const HomeScreen(),
     const RecipesScreen(),
+    const MealPlannerScreen(),
     const SettingsScreen(),
   ];
 
@@ -91,6 +93,12 @@ class MainScreen extends StatelessWidget {
                   icon: Icon(Icons.receipt_long_outlined),
                   activeIcon: Icon(Icons.receipt_long_rounded),
                   label: 'Recipes',
+                ),
+
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.set_meal_outlined),
+                    activeIcon: Icon(Icons.set_meal_rounded),
+                    label: 'Meal'
                 ),
 
                 BottomNavigationBarItem(
