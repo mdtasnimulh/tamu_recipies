@@ -23,20 +23,36 @@ class RandomRecipe extends StatelessWidget {
             return Scaffold(
               body: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FanCarouselImageSlider.sliderType2(
-                      imagesLink: state.recipes.map((e) => e.image ?? '').toList(),
-                      isAssets: false,
-                      autoPlay: false,
-                      sliderHeight: 300,
-                      currentItemShadow: const [],
-                      sliderDuration: const Duration(milliseconds: 200),
-                      imageRadius: 0,
-                      slideViewportFraction: 1.2,
+                    SizedBox(height: 12,),
+                    Padding(padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'Recipes',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: FanCarouselImageSlider.sliderType2(
+                        imagesLink: state.recipes.map((e) => e.image ?? '').toList(),
+                        isAssets: false,
+                        autoPlay: false,
+                        sliderHeight: 250,
+                        currentItemShadow: const [],
+                        sliderDuration: const Duration(milliseconds: 200),
+                        imageRadius: 0,
+                        slideViewportFraction: 1.2,
+                      ),
                     ),
                     SizedBox(height: 16,),
-                    Text(state.recipes.first.title.toString())
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(state.recipes.first.title.toString()),
+                    )
                   ],
                 ),
               ),
