@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore:
   drift:
   drift_flutter:
+  sqlite3_flutter_libs:
 #  hive:
 #  hive_flutter:
 
