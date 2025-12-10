@@ -23,21 +23,29 @@ class DatabaseService {
     final databasePath = join(databaseDirPath, "master_db.db");
     final database = await openDatabase(
       databasePath,
+      version: 1,
       onCreate: (db, version) {
-        db.execute(
-          '''
+        db.execute('''
             CREATE TABLE $_mealTableName (
               $_mealIdColumnName INTEGER PRIMARY KEY AUTOINCREMENT,
               $_mealTitleColumnName TEXT NOT NULL,
               $_mealDescriptionColumnName TEXT NOT NULL
             )
-          '''
-        );
-      }
+          ''');
+      },
     );
 
     return database;
   }
 
-
+  void addTask(String title, String description) async {
+    final db = await database;
+    await db.insert(
+        _mealTableName,
+        {
+          _mealTitleColumnName: title,
+          _mealDescriptionColumnName: description,
+        }
+    );
+  }
 }
