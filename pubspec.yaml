@@ -15,6 +15,7 @@ dependencies:
   flutter_svg:
   flutter_bloc:
   hydrated_bloc:
+  path:
   path_provider:
   dio:
   retrofit:
@@ -26,11 +27,8 @@ dependencies:
   youtube_player_flutter: 9.0.0
   dartz:
   cloud_firestore:
-  drift:
-  drift_flutter:
   sqlite3_flutter_libs:
-#  hive:
-#  hive_flutter:
+  sqflite:
 
 dev_dependencies:
   flutter_test:
@@ -38,8 +36,6 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
   retrofit_generator:
-  drift_dev:
-#  hive_generator:
   build_runner:
   json_serializable:
 

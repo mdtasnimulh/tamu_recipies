@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tamu_recipes/core/database/database_service.dart';
 
 class MealPlannerScreen extends StatefulWidget {
   const MealPlannerScreen({super.key});
@@ -8,6 +9,8 @@ class MealPlannerScreen extends StatefulWidget {
 }
 
 class _MealPlannerScreenState extends State<MealPlannerScreen> {
+  final DatabaseService _databaseService = DatabaseService.instance;
+
   @override
   Widget build(BuildContext context) {
     return const Center(
