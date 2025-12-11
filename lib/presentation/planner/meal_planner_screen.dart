@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tamu_recipes/core/configs/theme/app_colors.dart';
 import 'package:tamu_recipes/core/database/database_service.dart';
+import 'package:tamu_recipes/data/models/meal/meal.dart';
 
 class MealPlannerScreen extends StatefulWidget {
   const MealPlannerScreen({super.key});
@@ -16,7 +17,14 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(floatingActionButton: _addMealButton());
+    return Scaffold(
+      floatingActionButton: _addMealButton(),
+      body: Column(
+        children: [
+          _mealList(),
+        ],
+      ),
+    );
   }
 
   Widget _addMealButton() {
@@ -75,6 +83,30 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
         );
       },
       child: const Icon(Icons.add),
+    );
+  }
+
+  Widget _mealList() {
+    return Expanded(
+      child: FutureBuilder(
+          future: _databaseService.getMeal(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+              itemCount: snapshot.data?.length ?? 0,
+              itemBuilder: (context, index) {
+                Meal meal = snapshot.data![index];
+                return ListTile(
+                  title: Text(meal.title),
+                  subtitle: Text(meal.description),
+                  trailing: Checkbox(
+                    value: false,
+                    onChanged: (value) {}
+                  ),
+                );
+              }
+            );
+          }
+      ),
     );
   }
 }

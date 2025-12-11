@@ -1,5 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:tamu_recipes/data/models/meal/meal.dart';
 
 class DatabaseService {
   static Database? _db;
@@ -40,12 +41,24 @@ class DatabaseService {
 
   void addTask(String title, String description) async {
     final db = await database;
-    await db.insert(
-        _mealTableName,
-        {
-          _mealTitleColumnName: title,
-          _mealDescriptionColumnName: description,
-        }
-    );
+    await db.insert(_mealTableName, {
+      _mealTitleColumnName: title,
+      _mealDescriptionColumnName: description,
+    });
+  }
+
+  Future<List<Meal>> getMeal() async {
+    final db = await database;
+    final data = await db.query(_mealTableName);
+    List<Meal> meal = data
+        .map(
+          (e) => Meal(
+            id: e["id"] as int,
+            title: e["title"] as String,
+            description: e["description"] as String,
+          ),
+        )
+        .toList();
+    return meal;
   }
 }
