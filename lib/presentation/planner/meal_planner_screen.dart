@@ -19,11 +19,7 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _addMealButton(),
-      body: Column(
-        children: [
-          _mealList(),
-        ],
-      ),
+      body: Column(children: [_mealList()]),
     );
   }
 
@@ -48,7 +44,7 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                     hintText: "Title",
                   ),
                 ),
-                SizedBox(height: 12,),
+                SizedBox(height: 12),
                 TextField(
                   onChanged: (value) {
                     setState(() {
@@ -60,14 +56,11 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                     hintText: "Description",
                   ),
                 ),
-                SizedBox(height: 16,),
+                SizedBox(height: 16),
                 MaterialButton(
                   onPressed: () {
                     if (_title!.isEmpty || _description!.isEmpty) return;
-                    _databaseService.addTask(
-                      _title!,
-                      _description!,
-                    );
+                    _databaseService.addTask(_title!, _description!);
                     setState(() {
                       _title = "";
                       _description = "";
@@ -75,11 +68,11 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                     });
                   },
                   color: AppColors.primary,
-                  child: Text("Add", style: TextStyle(color: Colors.white),)
+                  child: Text("Add", style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
-          )
+          ),
         );
       },
       child: const Icon(Icons.add),
@@ -89,23 +82,37 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
   Widget _mealList() {
     return Expanded(
       child: FutureBuilder(
-          future: _databaseService.getMeal(),
-          builder: (context, snapshot) {
-            return ListView.builder(
-              itemCount: snapshot.data?.length ?? 0,
-              itemBuilder: (context, index) {
-                Meal meal = snapshot.data![index];
-                return ListTile(
-                  title: Text(meal.title),
-                  subtitle: Text(meal.description),
-                  trailing: Checkbox(
-                    value: false,
-                    onChanged: (value) {}
-                  ),
-                );
-              }
-            );
+        future: _databaseService.getMeal(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
           }
+
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              Meal meal = snapshot.data![index];
+              return ListTile(
+                onLongPress: () {
+                  _databaseService.deleteMeal(meal.id);
+                  setState(() {});
+                },
+                title: Text(meal.title),
+                subtitle: Text(meal.description),
+                trailing: Checkbox(
+                  value: meal.status == 1,
+                  onChanged: (value) {
+                    _databaseService.updateMealStatus(
+                      meal.id,
+                      value == true ? 1 : 0,
+                    );
+                    setState(() {});
+                  },
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

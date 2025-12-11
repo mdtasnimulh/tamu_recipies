@@ -10,6 +10,7 @@ class DatabaseService {
   final String _mealIdColumnName = "id";
   final String _mealTitleColumnName = "title";
   final String _mealDescriptionColumnName = "description";
+  final String _mealStatusColumnName = "status";
 
   DatabaseService._constructor();
 
@@ -30,7 +31,8 @@ class DatabaseService {
             CREATE TABLE $_mealTableName (
               $_mealIdColumnName INTEGER PRIMARY KEY AUTOINCREMENT,
               $_mealTitleColumnName TEXT NOT NULL,
-              $_mealDescriptionColumnName TEXT NOT NULL
+              $_mealDescriptionColumnName TEXT NOT NULL,
+              $_mealStatusColumnName INTEGER NOT NULL DEFAULT 0
             )
           ''');
       },
@@ -56,9 +58,29 @@ class DatabaseService {
             id: e["id"] as int,
             title: e["title"] as String,
             description: e["description"] as String,
+            status: e["status"] as int,
           ),
         )
         .toList();
     return meal;
+  }
+
+  void updateMealStatus(int id, int status) async {
+    final db = await database;
+    await db.update(
+      _mealTableName,
+      {_mealStatusColumnName: status},
+      where: "$_mealIdColumnName = ?",
+      whereArgs: [id],
+    );
+  }
+
+  void deleteMeal(int id) async {
+    final db = await database;
+    await db.delete(
+      _mealTableName,
+      where: "$_mealIdColumnName = ?",
+      whereArgs: [id],
+    );
   }
 }
