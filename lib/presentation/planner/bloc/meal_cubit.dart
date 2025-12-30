@@ -7,9 +7,9 @@ import 'package:tamu_recipes/domain/usecases/local/meal/get_meal_use_case.dart';
 import 'package:tamu_recipes/domain/usecases/local/meal/update_meal_use_case.dart';
 import 'package:tamu_recipes/presentation/service_locator.dart';
 
-import '../../../domain/entities/add_meal_params.dart';
-import '../../../domain/entities/delete_meal_params.dart';
-import '../../../domain/entities/update_meal_params.dart';
+import '../../../domain/entities/params/add_meal_params.dart';
+import '../../../domain/entities/params/delete_meal_params.dart';
+import '../../../domain/entities/params/update_meal_params.dart';
 import 'meal_state.dart';
 
 class MealCubit extends Cubit<MealState> {
