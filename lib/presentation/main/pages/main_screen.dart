@@ -5,6 +5,7 @@ import 'package:tamu_recipes/presentation/settings/settings_screen.dart';
 import '../../../core/configs/theme/app_colors.dart';
 import '../../home/home_screen.dart';
 import '../../orders/recipes_screen.dart';
+import '../../planner/bloc/meal_cubit.dart';
 import '../../theme/theme_cubit.dart';
 import '../bloc/bottom_nav_cubit.dart';
 
@@ -14,7 +15,10 @@ class MainScreen extends StatelessWidget {
   static final List<Widget> _pages = [
     const HomeScreen(),
     const RecipesScreen(),
-    const MealPlannerScreen(),
+    BlocProvider(
+      create: (_) => MealCubit()..loadMeals(),
+      child: const MealPlannerScreen(),
+    ),
     const SettingsScreen(),
   ];
 
