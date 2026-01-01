@@ -42,10 +42,7 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                     Text(
                       'No meals added yet 🍽️\nTap + to add one.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                   ],
                 ),
@@ -57,15 +54,26 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
               itemBuilder: (context, index) {
                 final meal = state.meals[index];
                 return ListTile(
-                  title: Text(meal.title),
-                  subtitle: Text(meal.description),
+                  title: Text(
+                    meal.title,
+                    style: TextStyle(
+                      decoration: meal.status == 1
+                          ? TextDecoration.lineThrough
+                          : null,
+                    ),
+                  ),
+                  subtitle: Text(
+                    meal.description,
+                    style: TextStyle(
+                      decoration: meal.status == 1
+                          ? TextDecoration.lineThrough
+                          : null,
+                    ),
+                  ),
                   trailing: Checkbox(
                     value: meal.status == 1,
                     onChanged: (value) {
-                      cubit.updateMealStatus(
-                        meal.id,
-                        value == true ? 1 : 0,
-                      );
+                      cubit.updateMealStatus(meal.id, value == true ? 1 : 0);
                     },
                   ),
                   onLongPress: () => cubit.deleteMeal(meal.id),
@@ -107,8 +115,10 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                     cubit.addMeal(_title, _description);
                     Navigator.pop(context);
                   },
-                  child: const Text("Add",
-                      style: TextStyle(color: Colors.white)),
+                  child: const Text(
+                    "Add",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),

@@ -4,8 +4,12 @@ import 'package:tamu_recipes/domain/repository/local/meal/local_meal_repository.
 import 'package:tamu_recipes/presentation/service_locator.dart';
 
 class GetMealUseCase extends UseCase<Either, dynamic> {
+  final LocalMealRepository repository;
+
+  GetMealUseCase(this.repository);
+
   @override
   Future<Either> call({params}) async {
-    return await serviceLocator<LocalMealRepository>().getMeal();
+    return repository.getMeal();
   }
 }

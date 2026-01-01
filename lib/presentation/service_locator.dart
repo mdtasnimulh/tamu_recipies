@@ -34,7 +34,9 @@ Future<void> initializeDependencies() async {
     GetRandomRecipeApiUseCase(),
   );
 
-  serviceLocator.registerSingleton<GetMealUseCase>(GetMealUseCase());
+  serviceLocator.registerLazySingleton<GetMealUseCase>(
+        () => GetMealUseCase(serviceLocator<LocalMealRepository>()),
+  );
 
   serviceLocator.registerLazySingleton<AddMealUseCase>(
         () => AddMealUseCase(serviceLocator<LocalMealRepository>()),
